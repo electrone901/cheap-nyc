@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electrone901/cheap-nyc.git"
+    "url": "git+https://github.com/electrone901/cheap-nyc-backend.git"
   },
   "author": "Song",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/electrone901/cheap-nyc/issues"
+    "url": "https://github.com/electrone901/cheap-nyc-backend/issues"
   },
   "homepage": "https://github.com/electrone901/cheap-nyc#readme",
   "devDependencies": {
