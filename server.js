@@ -4,10 +4,12 @@ const mongoose = require('mongoose');
 const db = require('./config/keys').mongoURI;
 
 const userRoutes = require("./routes/user");
+const foodRoutes = require("./routes/food");
 
 const app = express();
 
 app.use('/users', userRoutes);
+app.use('/foods', foodRoutes);
 
 app.get('/', (req, res) => res.send('It Working'));
 
