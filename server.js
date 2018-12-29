@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 
 const db = require('./config/keys').mongoURI;
 
@@ -16,6 +17,10 @@ app.use('/users', userRoutes);
 app.use('/foods', foodRoutes);
 
 app.get('/', (req, res) => res.send('It Working'));
+
+app.use(passport.initialize());
+
+require('./config/passport')(passport);
 
 const port = process.env.PORT || 8080;
 
