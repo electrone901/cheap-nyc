@@ -22,6 +22,9 @@ exports.registerUser = (req, res, next) => {
                 });
                 
                 bcrypt.genSalt(10, (err, salt) => {
+                    if(err){
+                        return res.status(500).json({error: err});
+                    }
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if(err){
                             return res.status(500).json({error: err});
@@ -29,7 +32,7 @@ exports.registerUser = (req, res, next) => {
                         newUser.password = hash;
                         newUser
                             .save()
-                            .then(user => res.json(user))
+                            .then(user => res.status(201).json(user))
                             .catch(err => console.log(err));
                     });
                 });
@@ -59,7 +62,7 @@ exports.loginUser = (req, res) => {
                                 if(err){
                                     return res.status(500).json({error: err});
                                 }
-                                res.json({
+                                res.status(201).json({
                                     success: true,
                                     token: 'Bearer ' + token
                                 });
