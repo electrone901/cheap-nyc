@@ -10,6 +10,12 @@ exports.test = (req, res, next) => {
 };
 
 exports.registerUser = (req, res, next) => {
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()){
+        return res.status(422).json(errors.array());
+    }
+    
     User.findOne({ email: req.body.email })
         .then(user => {
             if(user){
