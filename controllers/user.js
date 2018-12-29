@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs');
+
 const User = require('../models/User');
 
 exports.test = (req, res, next) => {
@@ -17,10 +19,18 @@ exports.registerUser = (req, res, next) => {
                     password: req.body.password
                 });
                 
-                newUser
-                    .save()
-                    .then(user => res.json(user))
-                    .catch(err => console.log(err));
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(newUser.password, salt, (err, hash) => {
+                        if(err){
+                            return res.status(500).json({error: err});
+                        }
+                        newUser.password = hash;
+                        newUser
+                            .save()
+                            .then(user => res.json(user))
+                            .catch(err => console.log(err));
+                    });
+                });
             }
         });
 };
