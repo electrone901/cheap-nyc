@@ -1,3 +1,5 @@
+const { validationResult } = require("express-validator/check");
+
 const Food = require("../models/Food");
 
 exports.test = (req, res, next) => {
@@ -20,6 +22,12 @@ exports.createFood = (req, res, next) => {
     const location = req.body.location;
     const description = req.body.description;
     const userId = req.user.id;
+    
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()){
+        return res.status(422).json(errors.array());
+    }
     
     const food = new Food({
         name: name,
