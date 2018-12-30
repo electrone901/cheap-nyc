@@ -4,6 +4,16 @@ exports.test = (req, res, next) => {
     res.json({msg: "Foods route works"});
 };
 
+exports.findFoods = (req, res, next) => {
+    Food.find()
+        .then(result => {
+            res.status(200).json({
+                msg: "Success on finding all foods",
+                foods: result
+            });
+        });
+};
+
 exports.createFood = (req, res, next) => {
     const name = req.body.name;
     const price = req.body.price;
