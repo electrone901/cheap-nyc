@@ -46,3 +46,20 @@ exports.createFood = (req, res, next) => {
         })
         .catch(err => console.log(err));
 };
+
+exports.findFood = (req, res, next) => {
+    const foodId = req.params.foodId;
+    
+    Food.findById(foodId)
+        .then(food => {
+            if(!food){
+                return res.status(404).json({error: 'Food post not found'});
+            }
+            res.status(200).json({
+                msg: 'Success on finding that post',
+                food: food
+            });
+        })
+        .catch(err => console.log(err));
+        
+};

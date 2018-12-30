@@ -30,4 +30,6 @@ router.post('/', passport.authenticate('jwt', {session: false}),
     foodController.createFood
 );
 
+router.get('/:foodId', foodController.findFood);
+
 module.exports = router;
