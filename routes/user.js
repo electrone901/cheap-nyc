@@ -15,6 +15,7 @@ router.post('/register',
             .withMessage('Please enter a vaild first name only'),
         body('email')
             .isEmail()
+            .normalizeEmail()
             .withMessage('Please enter a vaild email'),
         body('password')
             .isLength({min: 5, max: 20})
@@ -33,6 +34,7 @@ router.post('/login',
     [
         body('email')
             .isEmail()
+            .normalizeEmail()
             .withMessage('Please enter a vaild email'),
         body('password')
             .isLength({min: 5, max: 20})
