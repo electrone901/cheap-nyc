@@ -59,10 +59,38 @@ exports.findFood = (req, res, next) => {
                 return res.status(404).json({error: 'Food post not found'});
             }
             res.status(200).json({
-                msg: 'Success on finding that post',
+                msg: 'Success on finding that food post',
                 food: food
             });
         })
         .catch(err => console.log(err));
         
+};
+
+exports.editFood = (req, res, next) => {
+    const foodId = req.params.foodId;
+    const name = req.body.name;
+    const price = req.body.price;
+    const location = req.body.location;
+    const description = req.body.description;
+    
+    Food.findById(foodId)
+        .then(food => {
+            if(!food){
+                return res.status(404).json({error: 'Food post not found'});
+            }
+            food.name = name;
+            food.price = price;
+            food.location = location;
+            food.description = description;
+            
+            return food.save();
+        })
+        .then(result => {
+            res.status(200).json({
+                msg: 'Success on editing that food post',
+                food: result
+            });
+        })
+        .catch(err => console.log(err));
 };

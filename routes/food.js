@@ -32,4 +32,6 @@ router.post('/', passport.authenticate('jwt', {session: false}),
 
 router.get('/:foodId', foodController.findFood);
 
+router.put('/:foodId', passport.authenticate('jwt', {session: false}), foodController.editFood);
+
 module.exports = router;
