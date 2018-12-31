@@ -100,3 +100,21 @@ exports.editFood = (req, res, next) => {
         })
         .catch(err => console.log(err));
 };
+
+exports.removeFood = (req, res, next) => {
+    const foodId = req.params.foodId;
+    Food.findById(foodId)
+        .then(food => {
+            if(!food){
+                return res.status(404).json({error: 'Food post not found'});
+            }
+            return Food.findByIdAndRemove(foodId);
+        })
+        .then(result => {
+            res.status(200).json({
+                msg: 'Success on deleting that food post',
+                food: result
+            });
+        })
+        .catch(err => console.log(err));
+};
