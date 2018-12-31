@@ -13,6 +13,9 @@ exports.findFoods = (req, res, next) => {
                 msg: "Success on finding all foods",
                 foods: result
             });
+        })
+        .catch(err => {
+            console.log(err);
         });
 };
 
