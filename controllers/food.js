@@ -74,6 +74,12 @@ exports.editFood = (req, res, next) => {
     const location = req.body.location;
     const description = req.body.description;
     
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()){
+        return res.status(422).json(errors.array());
+    }
+    
     Food.findById(foodId)
         .then(food => {
             if(!food){
