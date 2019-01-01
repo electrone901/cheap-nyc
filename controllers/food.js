@@ -85,6 +85,10 @@ exports.editFood = (req, res, next) => {
             if(!food){
                 return res.status(404).json({error: 'Food post not found'});
             }
+            
+            if(food.userId.toString() !== req.user.id){
+                return res.status(403).json({error: 'You are not allow to edit this food post'});
+            }
             food.name = name;
             food.price = price;
             food.location = location;
