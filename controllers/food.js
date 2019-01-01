@@ -44,7 +44,7 @@ exports.createFood = (req, res, next) => {
         .then(result => {
             res.status(201).json({
                 msg: "Success on creating a food post",
-                food: result
+                food: food
             });
         })
         .catch(err => console.log(err));
