@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const helmet = require("helmet");
 
 const db = require('./config/keys').mongoURI;
 
@@ -20,6 +21,8 @@ app.use((req, res, next) => {
     
     next();
 });
+
+app.use(helmet());
 
 app.use('/users', userRoutes);
 app.use('/foods', foodRoutes);
