@@ -22,7 +22,7 @@ router.post('/register',
             .withMessage('Please enter password that is at least 5 characters long and not longer than 20 characters'),
         body('confirmPassword').custom((value, { req }) => {
                 if (value !== req.body.password) {
-                    throw new Error('These passwords do not match');
+                    throw new Error('Please make sure the that both passwords match');
                 }
                 return true;
             })
