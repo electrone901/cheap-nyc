@@ -8,16 +8,30 @@ exports.test = (req, res, next) => {
 
 exports.findFoods = (req, res, next) => {
     const targetPrice = req.query.price;
-    Food.find({price: {$lte: targetPrice}})
-        .then(result => {
-            res.status(200).json({
-                msg: "Success on finding all foods",
-                foods: result
+    if(targetPrice){
+        Food.find({price: {$lte: targetPrice}})
+            .then(result => {
+                res.status(200).json({
+                    msg: "Success on finding all foods with price less than or equal to $" + targetPrice,
+                    foods: result
+                });
+            })
+            .catch(err => {
+                console.log(err);
             });
-        })
-        .catch(err => {
-            console.log(err);
-        });
+    }
+    else{
+        Food.find()
+            .then(result => {
+                res.status(200).json({
+                    msg: "Success on finding all foods",
+                    foods: result
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 };
 
 exports.createFood = (req, res, next) => {
