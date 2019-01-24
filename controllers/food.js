@@ -7,12 +7,14 @@ exports.test = (req, res, next) => {
 };
 
 exports.findFoods = (req, res, next) => {
-    const targetPrice = req.query.price;
-    if(targetPrice){
-        Food.find({price: {$lte: targetPrice}})
+    const lowPrice = req.query.price1;
+    const highPrice = req.query.price2;
+    
+    if(lowPrice){
+        Food.find({price: {$lte: highPrice, $gte:lowPrice}})
             .then(result => {
                 res.status(200).json({
-                    msg: "Success on finding all foods with price less than or equal to $" + targetPrice,
+                    msg: "Success on finding all foods with price range from $" + lowPrice + " to $" + highPrice,
                     foods: result
                 });
             })
