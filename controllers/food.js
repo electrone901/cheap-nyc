@@ -7,7 +7,8 @@ exports.test = (req, res, next) => {
 };
 
 exports.findFoods = (req, res, next) => {
-    Food.find()
+    const targetPrice = req.query.price;
+    Food.find({price: {$lte: targetPrice}})
         .then(result => {
             res.status(200).json({
                 msg: "Success on finding all foods",
