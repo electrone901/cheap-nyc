@@ -20,6 +20,11 @@ Link - https://cheapnycserver.herokuapp.com/foods
 * Description - Get all food posts
 * Request - GET
 
+Link - https://cheapnycserver.herokuapp.com/foods?price1=1&price2=5
+* Description - Get all food posts by price range
+* Request - GET
+* Params - price1 and price2 must be a number
+
 Link - https://cheapnycserver.herokuapp.com/foods
 * Description - Create a food post
 * Request - POST
