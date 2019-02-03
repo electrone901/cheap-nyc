@@ -40,7 +40,9 @@ exports.registerUser = (req, res, next) => {
                         newUser
                             .save()
                             .then(user => res.status(201).json(user))
-                            .catch(err => console.log(err));
+                            .catch(err => {
+                                return res.status(500).json({error: err});
+                            });
                     });
                 });
             }

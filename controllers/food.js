@@ -19,7 +19,7 @@ exports.findFoods = (req, res, next) => {
                 });
             })
             .catch(err => {
-                console.log(err);
+                return res.status(500).json({error: err});
             });
     }
     else{
@@ -31,7 +31,7 @@ exports.findFoods = (req, res, next) => {
                 });
             })
             .catch(err => {
-                console.log(err);
+                return res.status(500).json({error: err});
             });
     }
 };
@@ -64,7 +64,9 @@ exports.createFood = (req, res, next) => {
                 food: food
             });
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            return res.status(500).json({error: err});
+        });
 };
 
 exports.findFood = (req, res, next) => {
@@ -80,7 +82,9 @@ exports.findFood = (req, res, next) => {
                 food: food
             });
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            return res.status(500).json({error: err});
+        });
         
 };
 
@@ -120,7 +124,9 @@ exports.editFood = (req, res, next) => {
                 food: result
             });
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            return res.status(500).json({error: err});
+        });
 };
 
 exports.removeFood = (req, res, next) => {
@@ -143,5 +149,7 @@ exports.removeFood = (req, res, next) => {
                 food: result
             });
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            return res.status(500).json({error: err});
+        });
 };
