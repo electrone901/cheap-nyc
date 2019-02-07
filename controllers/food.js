@@ -7,32 +7,35 @@ exports.test = (req, res, next) => {
 };
 
 exports.findFoods = (req, res, next) => {
-    const lowPrice = req.query.price1;
-    const highPrice = req.query.price2;
+    const type = req.query.type;
     
-    if(lowPrice){
-        Food.find({price: {$lte: highPrice, $gte:lowPrice}})
-            .then(result => {
-                res.status(200).json({
-                    msg: "Success on finding all foods with price range from $" + lowPrice + " to $" + highPrice,
-                    foods: result
+    switch(type){
+        case 'price':
+            const lowPrice = req.query.price1;
+            const highPrice = req.query.price2;
+            
+            Food.find({price: {$lte: highPrice, $gte:lowPrice}})
+                .then(result => {
+                    res.status(200).json({
+                        msg: "Success on finding all foods with price range from $" + lowPrice + " to $" + highPrice,
+                        foods: result
+                    });
+                })
+                .catch(err => {
+                    return res.status(500).json({error: err});
                 });
-            })
-            .catch(err => {
-                return res.status(500).json({error: err});
-            });
-    }
-    else{
-        Food.find()
-            .then(result => {
-                res.status(200).json({
-                    msg: "Success on finding all foods",
-                    foods: result
+            break;
+        default:
+            Food.find()
+                .then(result => {
+                    res.status(200).json({
+                        msg: "Success on finding all foods",
+                        foods: result
+                    });
+                })
+                .catch(err => {
+                    return res.status(500).json({error: err});
                 });
-            })
-            .catch(err => {
-                return res.status(500).json({error: err});
-            });
     }
 };
 
