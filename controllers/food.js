@@ -25,6 +25,20 @@ exports.findFoods = (req, res, next) => {
                     return res.status(500).json({error: err});
                 });
             break;
+        case 'name':
+            const foodName = req.query.name;
+            
+            Food.find({name: foodName})
+                .then(result => {
+                    res.status(200).json({
+                        msg: "Success on finding all foods that match with " + foodName,
+                        foods: result
+                    });
+                })
+                .catch(err => {
+                    return res.status(500).json({error: err});
+                });
+            break;
         default:
             Food.find()
                 .then(result => {
