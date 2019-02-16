@@ -2,26 +2,31 @@
 
 Rest API - https://cheapnycserver.herokuapp.com
 
-##User
+## User
 Create a new user
 * Link - https://cheapnycserver.herokuapp.com/users/register
 * Request - POST
 * Body - name, email, password, confirmPassword
 
-Login the user in and get a token
+Login the user and get a token
 * Link - https://cheapnycserver.herokuapp.com/users/login
 * Request - POST
 * Body - email, password
 
-##Food
-Get all food posts
+## Food
+Find all food posts
 * Link - https://cheapnycserver.herokuapp.com/foods
 * Request - GET
 
-Get all food posts by price range
-* Link - https://cheapnycserver.herokuapp.com/foods?price1=1&price2=5
+Find all food posts by price range
+* Link - https://cheapnycserver.herokuapp.com/foods?type=price&price1=1&price2=5
 * Request - GET
 * Params - price1 and price2 must be a number
+
+Find all food posts by name
+* Link - https://cheapnycserver.herokuapp.com/foods?type=name&name=Pizza
+* Request - GET
+* Params - name
 
 Create a food post
 * Link - https://cheapnycserver.herokuapp.com/foods
