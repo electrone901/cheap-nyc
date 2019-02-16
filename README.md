@@ -2,46 +2,44 @@
 
 Rest API - https://cheapnycserver.herokuapp.com
 
-## User
----
-Link - https://cheapnycserver.herokuapp.com/users/register
-* Description - Create a new user
+##User
+Create a new user
+* Link - https://cheapnycserver.herokuapp.com/users/register
 * Request - POST
 * Body - name, email, password, confirmPassword
 
-Link - https://cheapnycserver.herokuapp.com/users/login
-* Description - Login the user in and get a token
+Login the user in and get a token
+* Link - https://cheapnycserver.herokuapp.com/users/login
 * Request - POST
 * Body - email, password
 
-## Food
----
-Link - https://cheapnycserver.herokuapp.com/foods
-* Description - Get all food posts
+##Food
+Get all food posts
+* Link - https://cheapnycserver.herokuapp.com/foods
 * Request - GET
 
-Link - https://cheapnycserver.herokuapp.com/foods?price1=1&price2=5
-* Description - Get all food posts by price range
+Get all food posts by price range
+* Link - https://cheapnycserver.herokuapp.com/foods?price1=1&price2=5
 * Request - GET
 * Params - price1 and price2 must be a number
 
-Link - https://cheapnycserver.herokuapp.com/foods
-* Description - Create a food post
+Create a food post
+* Link - https://cheapnycserver.herokuapp.com/foods
 * Request - POST
 * Body - name, price, location, description
 * Must be authenticate
 
-Link - https://cheapnycserver.herokuapp.com/foods/:foodId
-* Description - Get that food post that match with the foodID
+Get that food post that match with the foodID
+* Link - https://cheapnycserver.herokuapp.com/foods/:foodId
 * Request - GET
 
-Link - https://cheapnycserver.herokuapp.com/foods/:foodId
-* Description - Edit that food post that match with the foodID
+Edit that food post that match with the foodID
+* Link - https://cheapnycserver.herokuapp.com/foods/:foodId
 * Request - PUT
 * Body - name, price, location, description
 * Must be authenticate
 
-Link - https://cheapnycserver.herokuapp.com/foods/:foodId
-* Description - Delete that food post that match with the foodID
+Delete that food post that match with the foodID
+* Link - https://cheapnycserver.herokuapp.com/foods/:foodId
 * Request - DELETE
 * Must be authenticate
