@@ -204,3 +204,33 @@ exports.addComment = (req, res, next) => {
             return res.status(500).json({error: err});
         });
 };
+
+exports.editComment = (req, res, next) => {
+    const text = req.body.text;
+    const userId = req.user.id;
+    const commentId = req.params.commentId;
+    
+    Comment.findById(commentId)
+        .then(comment => {
+            if(!comment){
+                return res.status(404).json({error: 'Comment not found'});
+            }
+            
+            if(comment.userId.toString() !== userId){
+                return res.status(403).json({error: 'You are not allow to edit this comment'});
+            }
+            
+            comment.text = text;
+            
+            return comment.save();
+        })
+        .then(result => {
+            res.status(200).json({
+                msg: "Success on editing that comment",
+                comment: result
+            });
+        })
+        .catch(err => {
+            return res.status(500).json({error: err});
+        });
+};
