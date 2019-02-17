@@ -176,6 +176,7 @@ exports.addComment = (req, res, next) => {
     const name = req.user.name;
     const text = req.body.text;
     const userId = req.user.id;
+    let foodInfor;
     
     const comment = new Comment({
         name: name,
@@ -185,9 +186,18 @@ exports.addComment = (req, res, next) => {
     
     comment.save()
         .then(result => {
+            return Food.findById(req.params.foodId);
+        })
+        .then(food => {
+            foodInfor = food;
+            food.comments.push(comment);
+            return food.save();
+        })
+        .then(result => {
             res.status(201).json({
                 msg: "Success on adding comment",
-                comment: comment
+                comment: comment,
+                food: { _id: foodInfor._id }
             });
         })
         .catch(err => {
