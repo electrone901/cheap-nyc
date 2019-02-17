@@ -234,3 +234,29 @@ exports.editComment = (req, res, next) => {
             return res.status(500).json({error: err});
         });
 };
+
+exports.deleteComment = (req, res, next) => {
+    const commentId = req.params.commentId;
+    
+    Comment.findById(commentId)
+        .then(comment => {
+            if(!comment){
+                return res.status(404).json({error: 'Comment not found'});
+            }
+            
+            if(comment.userId.toString() !== req.user.id){
+                return res.status(403).json({error: 'You are not allow to delete this comment'});
+            }
+            
+            return Comment.findByIdAndRemove(commentId);
+        })
+        .then(result => {
+            res.status(200).json({
+                msg: 'Success on deleting that comment',
+                food: result
+            });
+        })
+        .catch(err => {
+            return res.status(500).json({error: err});
+        });
+};
