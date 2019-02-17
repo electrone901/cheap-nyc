@@ -2,29 +2,15 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const foodSchema = new Schema({
+const commentSchema = new Schema({
     name: {
         type: String,
         required: true
     },
-    price: {
-        type: Number,
-        required: true
-    },
-    location: {
+    text: {
         type: String,
         required: true
     },
-    description: {
-        type: String,
-        required: true
-    },
-    comments: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Comment'
-        }
-    ],
     date: {
         type: Date,
         default: Date.now
@@ -36,4 +22,4 @@ const foodSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Food', foodSchema);
+module.exports = mongoose.model('Comment', commentSchema);
