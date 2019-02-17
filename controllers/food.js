@@ -90,7 +90,7 @@ exports.createFood = (req, res, next) => {
 exports.findFood = (req, res, next) => {
     const foodId = req.params.foodId;
     
-    Food.findById(foodId)
+    Food.findById(foodId).populate('comments')
         .then(food => {
             if(!food){
                 return res.status(404).json({error: 'Food post not found'});
