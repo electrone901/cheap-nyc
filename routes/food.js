@@ -54,4 +54,6 @@ router.put('/:foodId', passport.authenticate('jwt', {session: false}),
 
 router.delete('/:foodId', passport.authenticate('jwt', {session: false}), foodController.removeFood);
 
+router.post('/:foodId/comment', passport.authenticate('jwt', {session: false}), foodController.addComment);
+
 module.exports = router;

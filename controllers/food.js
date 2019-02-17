@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator/check");
 
 const Food = require("../models/Food");
+const Comment = require("../models/Comment");
 
 exports.test = (req, res, next) => {
     res.json({msg: "Foods route works"});
@@ -164,6 +165,29 @@ exports.removeFood = (req, res, next) => {
             res.status(200).json({
                 msg: 'Success on deleting that food post',
                 food: result
+            });
+        })
+        .catch(err => {
+            return res.status(500).json({error: err});
+        });
+};
+
+exports.addComment = (req, res, next) => {
+    const name = req.user.name;
+    const text = req.body.text;
+    const userId = req.user.id;
+    
+    const comment = new Comment({
+        name: name,
+        text: text,
+        userId: userId
+    });
+    
+    comment.save()
+        .then(result => {
+            res.status(201).json({
+                msg: "Success on adding comment",
+                comment: comment
             });
         })
         .catch(err => {
