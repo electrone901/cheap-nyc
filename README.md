@@ -48,3 +48,21 @@ Delete that food post that match with the foodID
 * Link - https://cheapnycserver.herokuapp.com/foods/:foodId
 * Request - DELETE
 * Must be authenticate
+
+## Comment
+Create a comment to the food post
+* Link - https://cheapnycserver.herokuapp.com/foods/:foodId/comment
+* Request - POST
+* Body - text
+* Must be authenticate
+
+Edit a comment
+* Link - https://cheapnycserver.herokuapp.com/foods/:foodId/comment/:commentId
+* Request - PUT
+* Body - text
+* Must be authenticate
+
+Delete a comment
+* Link - https://cheapnycserver.herokuapp.com/foods/:foodId/comment/:commentId
+* Request - DELETE
+* Must be authenticate
