@@ -238,15 +238,17 @@ exports.editComment = (req, res, next) => {
 exports.deleteComment = (req, res, next) => {
     const commentId = req.params.commentId;
     const foodId = req.params.foodId;
+    let error;
     
     Comment.findById(commentId)
         .then(comment => {
             if(!comment){
-                return res.status(404).json({error: 'Comment not found'});
+                throw new error(res.status(404).json({error: 'Comment not found'}));
             }
             
             if(comment.userId.toString() !== req.user.id){
-                return res.status(403).json({error: 'You are not allow to delete this comment'});
+                error = true;
+                throw new error(res.status(403).json({error: 'You are not allow to delete this comment'}));
             }
             return Comment.findByIdAndRemove(commentId);
         })
