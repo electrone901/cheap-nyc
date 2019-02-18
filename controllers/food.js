@@ -237,6 +237,7 @@ exports.editComment = (req, res, next) => {
 
 exports.deleteComment = (req, res, next) => {
     const commentId = req.params.commentId;
+    const foodId = req.params.foodId;
     
     Comment.findById(commentId)
         .then(comment => {
@@ -247,8 +248,19 @@ exports.deleteComment = (req, res, next) => {
             if(comment.userId.toString() !== req.user.id){
                 return res.status(403).json({error: 'You are not allow to delete this comment'});
             }
-            
             return Comment.findByIdAndRemove(commentId);
+        })
+        .then(result => {
+            return Food.findById(foodId);
+        })
+        .then(food => {
+            const removeIndex = food.comments
+                .map(item => item._id.toString())
+                .indexOf(commentId);
+                
+            food.comments.splice(removeIndex, 1);
+            
+            return food.save();
         })
         .then(result => {
             res.status(200).json({
