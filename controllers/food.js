@@ -159,6 +159,10 @@ exports.removeFood = (req, res, next) => {
                 return res.status(403).json({error: 'You are not allow to delete this food post'});
             }
             
+            for(let comment of food.comments){
+                Comment.findById(comment._id)
+                    .then(comment => Comment.findByIdAndRemove(comment._id));
+            }
             return Food.findByIdAndRemove(foodId);
         })
         .then(result => {
